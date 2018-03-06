@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -22,14 +23,15 @@ public class ContactsHelper {
     }
 
 
-    long insert(String name, String phone, String birthday) {
+    void insert(String name, String phone, String birthday) {
         ContentValues cv = new ContentValues();
 
         cv.put(DBHelper.COLUMN_NAME, name);
         cv.put(DBHelper.COLUMN_PHONE, phone);
         cv.put(DBHelper.COLUMN_BIRTHDAY, birthday);
 
-        return db.insert(TABLE_NAME, null, cv);
+        db.insert(TABLE_NAME, null, cv);
+        db.close();
     }
 
     ArrayList<Contact> getAll() {
@@ -54,6 +56,28 @@ public class ContactsHelper {
         return arr;
     }
 
-    
+    void delete(long id){
+        db.delete(DBHelper.TABLE_NAME,"_id=" + id,null);
+        db.close();
+    }
+
+    void update(Contact contact){
+        ContentValues cv = new ContentValues();
+
+        cv.put(DBHelper.COLUMN_NAME, contact.getName());
+        cv.put(DBHelper.COLUMN_PHONE, contact.getPhone());
+        cv.put(DBHelper.COLUMN_BIRTHDAY, contact.getBirthday());
+
+        Log.e("update",contact.toString());
+
+        db.update(DBHelper.TABLE_NAME,cv,"_id=?",new String[]{String.valueOf(contact.getId())});
+        db.close();
+
+
+    }
+
+
+
+
 }
 

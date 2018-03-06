@@ -32,7 +32,7 @@ public class InsertActivity extends AppCompatActivity {
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name.getText().toString().equals("") || num.getText().toString().equals("") || birthday.getText().toString().equals("")){
+                if (name.getText().toString().equals("") || num.getText().toString().equals("")){
                     Snackbar.make(view,"Name and Number can't be empty",Snackbar.LENGTH_LONG).show();
                 }
                 else {

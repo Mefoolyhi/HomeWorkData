@@ -40,12 +40,15 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name.getText().toString().equals("") || num.getText().toString().equals("") || brth.getText().toString().equals("")){
+                if (name.getText().toString().equalsIgnoreCase("") || num.getText().toString().equalsIgnoreCase("")){
                     Snackbar.make(view,"Name and Number can't be empty",Snackbar.LENGTH_LONG).show();
                 }
                 else {
                     ContactsHelper ch = new ContactsHelper(getApplicationContext());
-
+                    contact.setName(name.getText().toString());
+                    contact.setPhone(num.getText().toString());
+                    contact.setBirthday(brth.getText().toString());
+                    ch.update(contact);
                     Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -56,7 +59,12 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ContactsHelper ch = new ContactsHelper(getApplicationContext());
+                ch.delete(contact.getId());
 
+
+                Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
