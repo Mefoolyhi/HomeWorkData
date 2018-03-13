@@ -18,7 +18,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_this_world_acivity);
 
-        long id = getIntent().getParcelableExtra("contact");
+        int id = getIntent().getIntExtra("contact",0);
         ContactsHelper ch = new ContactsHelper(getApplicationContext());
         contact = ch.getContact(id);
         name = findViewById(R.id.name);
@@ -37,6 +37,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -54,6 +55,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
                     ch.update(contact);
                     Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }
@@ -68,6 +70,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

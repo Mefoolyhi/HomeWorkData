@@ -26,6 +26,7 @@ public class InsertActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(InsertActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -40,6 +41,7 @@ public class InsertActivity extends AppCompatActivity {
                     ch.insert(name.getText().toString(), num.getText().toString(), birthday.getText().toString());
                     Intent intent = new Intent(InsertActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

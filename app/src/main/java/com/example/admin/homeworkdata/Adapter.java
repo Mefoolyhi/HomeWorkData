@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ContactsViewHolder> {
     @Override
     public void onBindViewHolder(Adapter.ContactsViewHolder holder, int position) {
         Contact contact = data.get(position);
-        holder.setRecord(contact);
+        holder.setRecord(contact,position);
+        Log.e("Contact",contact.toString());
         holder.name.setText(contact.getName());
         holder.num.setText(contact.getPhone());
         holder.brth.setText(contact.getBirthday());
@@ -49,6 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ContactsViewHolder> {
         TextView name,num,brth;
         CardView cv;
         Contact contact;
+        int pos;
 
 
         public ContactsViewHolder(View view) {
@@ -62,16 +65,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ContactsViewHolder> {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context,ChangeThisWorldAcivity.class);
-                    intent.putExtra("contact", contact.getId());
+                    intent.putExtra("contact", pos);
                     context.startActivity(intent);
                 }
             });
 
 
+
+
         }
 
-        void setRecord(Contact contact){
+        void setRecord(Contact contact,int pos){
             this.contact = contact;
+            this.pos = pos;
         }
     }
 }
