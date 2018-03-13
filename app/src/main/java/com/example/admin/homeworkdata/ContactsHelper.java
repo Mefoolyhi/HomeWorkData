@@ -61,6 +61,13 @@ public class ContactsHelper {
         db.close();
     }
 
+    Contact getContact(long id){
+        String q = "SELECT * FROM "+DBHelper.TABLE_NAME+" WHERE _id = " + id ;
+        Cursor c = db.rawQuery(q,null);
+        Contact contact = new Contact(c.getLong(0),c.getString(1),c.getString(2),c.getString(3));
+        db.close();
+        return contact;
+    }
     void update(Contact contact){
         ContentValues cv = new ContentValues();
 

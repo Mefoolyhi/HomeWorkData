@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by admin on 05.03.2018.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactsViewHolder> {
+public class Adapter extends RecyclerView.Adapter<Adapter.ContactsViewHolder> {
 
     private ArrayList<Contact> data;
     private Context context;
@@ -25,13 +25,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactsViewHolder
         return new ContactsViewHolder(view);
     }
 
-    public MyAdapter(ArrayList<Contact> data,Context context){
+    public Adapter(ArrayList<Contact> data, Context context){
         this.data = data;
         this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter.ContactsViewHolder holder, int position) {
+    public void onBindViewHolder(Adapter.ContactsViewHolder holder, int position) {
         Contact contact = data.get(position);
         holder.setRecord(contact);
         holder.name.setText(contact.getName());
@@ -62,7 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactsViewHolder
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context,ChangeThisWorldAcivity.class);
-                    intent.putExtra("contact", contact);
+                    intent.putExtra("contact", contact.getId());
                     context.startActivity(intent);
                 }
             });

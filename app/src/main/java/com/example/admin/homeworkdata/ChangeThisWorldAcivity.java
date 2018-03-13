@@ -17,7 +17,10 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_this_world_acivity);
-        contact = getIntent().getParcelableExtra("contact");
+
+        long id = getIntent().getParcelableExtra("contact");
+        ContactsHelper ch = new ContactsHelper(getApplicationContext());
+        contact = ch.getContact(id);
         name = findViewById(R.id.name);
         num = findViewById(R.id.num);
         brth = findViewById(R.id.brth);
