@@ -19,13 +19,13 @@ public class InsertActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         birthday = findViewById(R.id.brth);
         num = findViewById(R.id.num);
+        final int size = getIntent().getIntExtra("size",0);
         insert = findViewById(R.id.insert);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(InsertActivity.this, MainActivity.class);
-                startActivity(intent);
+
                 finish();
             }
         });
@@ -38,9 +38,8 @@ public class InsertActivity extends AppCompatActivity {
                 }
                 else {
                     ContactsHelper ch = new ContactsHelper(getApplicationContext());
-                    ch.insert(name.getText().toString(), num.getText().toString(), birthday.getText().toString());
-                    Intent intent = new Intent(InsertActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    ch.insert(size, name.getText().toString(), num.getText().toString(), birthday.getText().toString(),"");
+                    setResult(2);
                     finish();
                 }
             }

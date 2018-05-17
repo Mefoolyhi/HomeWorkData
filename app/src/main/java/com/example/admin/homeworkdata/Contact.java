@@ -9,9 +9,18 @@ import android.os.Parcelable;
 
 public class Contact implements Parcelable {
     private long id;
+    private long idForServ;
     private String name;
     private String phone;
     private String birthday;
+
+    public long getIdForServ() {
+        return idForServ;
+    }
+
+    public void setIdForServ(long idForServ) {
+        this.idForServ = idForServ;
+    }
 
     public Contact(long id, String name, String phone, String birthday) {
         this.id = id;
@@ -19,7 +28,6 @@ public class Contact implements Parcelable {
         this.phone = phone;
         this.birthday = birthday;
     }
-
     protected Contact(Parcel in) {
         id = in.readLong();
         name = in.readString();

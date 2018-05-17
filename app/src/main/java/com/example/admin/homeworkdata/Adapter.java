@@ -1,5 +1,6 @@
 package com.example.admin.homeworkdata;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -20,15 +21,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ContactsViewHolder> {
 
     private ArrayList<Contact> data;
     private Context context;
+
+
+
+
     @Override
     public ContactsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false); // создаём вьюшку для кажого элемента
+        context = parent.getContext();
         return new ContactsViewHolder(view);
     }
 
-    public Adapter(ArrayList<Contact> data, Context context){
+    public Adapter(ArrayList<Contact> data){
         this.data = data;
-        this.context = context;
     }
 
     @Override
@@ -66,7 +71,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ContactsViewHolder> {
                 public void onClick(View view) {
                     Intent intent = new Intent(context,ChangeThisWorldAcivity.class);
                     intent.putExtra("contact", pos);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+                    ((Activity) context).finish();
                 }
             });
 

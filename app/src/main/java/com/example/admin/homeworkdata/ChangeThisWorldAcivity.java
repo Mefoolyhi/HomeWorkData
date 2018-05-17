@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("contact",0);
         ContactsHelper ch = new ContactsHelper(getApplicationContext());
         contact = ch.getContact(id);
+        contact.setIdForServ(id);
         name = findViewById(R.id.name);
         num = findViewById(R.id.num);
         brth = findViewById(R.id.brth);
@@ -35,6 +37,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -53,6 +56,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
                     contact.setPhone(num.getText().toString());
                     contact.setBirthday(brth.getText().toString());
                     ch.update(contact);
+
                     Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -65,7 +69,7 @@ public class ChangeThisWorldAcivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ContactsHelper ch = new ContactsHelper(getApplicationContext());
-                ch.delete(contact.getId());
+                ch.delete(contact.getId(),contact.getIdForServ());
 
 
                 Intent intent = new Intent(ChangeThisWorldAcivity.this, MainActivity.class);
